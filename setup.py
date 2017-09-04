@@ -13,7 +13,7 @@ from os import path
 
 readme_file = 'README.md'
 NAME = 'nansatmap'
-REQS = ['nansat', 'scipy', 'matplotlib', 'basemap']
+REQS = ['scipy', 'matplotlib', 'basemap']
 
 here = path.abspath(path.dirname(path.realpath(__file__)))
 

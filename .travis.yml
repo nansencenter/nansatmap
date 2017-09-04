@@ -1,0 +1,29 @@
+language: python
+python:
+  - 2.7
+sudo: false
+
+before_install:
+  - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b -f -p $HOME/miniconda
+  - export PATH=$HOME/miniconda/bin:$PATH
+
+install:
+  - conda update -q --yes conda
+  - conda install -q --yes -c conda-forge gdal numpy scipy matplotlib pillow netcdf4 nose cfunits coveralls
+  - conda install -q --yes -c conda-forge basemap
+  - export GDAL_DATA=$HOME/miniconda/share/gdal/
+  - export GEOS_DIR=$HOME/miniconda/
+  - python -c 'import gdal; print gdal.__file__'
+  - python -c 'from mpl_toolkits.basemap import Basemap'
+  - pip install https://github.com/nansencenter/nansat/archive/issue196_strip_down.zip
+  - python setup.py install
+
+script:
+  - coverage run --omit=nansatmap/tests.py --source=nansatmap setup.py test
+
+after_success:
+  - coveralls
+
+
