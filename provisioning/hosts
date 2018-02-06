@@ -1,0 +1,3 @@
+[nansatmap]
+nansatmap ansible_connection=local
+

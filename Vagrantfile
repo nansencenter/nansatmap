@@ -9,6 +9,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"
 
+  config.vm.define "nansatmap", primary: true do |nansatmap|
+  end
+
   config.vm.provider "virtualbox" do |v|
     v.memory = 4000
     v.cpus = 2
