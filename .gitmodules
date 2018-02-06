@@ -1,0 +1,3 @@
+[submodule "geo-spaas-vagrant"]
+	path = geo-spaas-vagrant
+	url = git@github.com:nansencenter/geo-spaas-vagrant.git
