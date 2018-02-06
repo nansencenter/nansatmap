@@ -1,0 +1,6 @@
+---
+- name: nansatmap | Create link from Python dist-packages to nansat
+  file: path='{{ python_dist_packages }}/nansatmap'
+        src='/vagrant/nansatmap'
+        state=link
+        force=yes
