@@ -1,0 +1,9 @@
+---
+- hosts: nansatmap
+  roles:
+    - role: andrewrothstein.miniconda
+    - role: andrewrothstein.conda-env
+      conda_env_name: py3nansat
+      conda_env_environment: conda_env_requirements.yml
+      conda_env_activate_for_login_shell: True
+    - nansatmap
