@@ -23,11 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "provisioning/site.yml"
-    ansible.inventory_path = "provisioning/hosts.yml"
-    ansible.provisioning_path = "/vagrant"
-    ansible.verbose = "vvv"
-    ansible.install = true
-    ansible.install_mode = "pip"
+    ansible.galaxy_role_file = 'provisioning/requirements.yml'
   end
 
 end

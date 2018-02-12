@@ -1,9 +1,9 @@
 ---
 - hosts: nansatmap
   roles:
-    - {role: geo-spaas-vagrant/provisioning/roles/conda}
-    - {role: nansatmap}
-  environment:
-    PATH: "{{ conda_dir }}/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    GDAL_DATA: "{{ conda_dir }}/share/gdal"
-    LC_ALL: "en_US.UTF-8"
+    - role: andrewrothstein.miniconda
+    - role: andrewrothstein.conda-env
+      conda_env_name: py3nansat
+      conda_env_environment: conda_env_py3nansat.yml
+      conda_env_activate_for_login_shell: True
+    - nansatmap

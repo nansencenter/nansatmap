@@ -1,6 +1,3 @@
 ---
-- name: nansatmap | Create link from Python dist-packages to nansat
-  file: path='{{ python_dist_packages }}/nansatmap'
-        src='/vagrant/nansatmap'
-        state=link
-        force=yes
+- name: nansatmap | Add PYTHONPATH to bashrc
+  lineinfile: dest="/home/vagrant/.bashrc" line="export PYTHONPATH=/vagrant/nansatmap"
