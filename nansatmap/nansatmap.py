@@ -1,19 +1,13 @@
-# Name:    nansat_map.py
-# Purpose: Container of NansatMap class
-# Authors:      Asuka Yamakawa, Anton Korosov, Knut-Frode Dagestad,
+# Name:    nansatmap.py
+# Purpose: Container of Nansatmap class
+# Authors:      Anton Korosov, Asuka Yamakawa, Knut-Frode Dagestad,
 #               Morten W. Hansen, Alexander Myasoyedov,
 #               Dmitry Petrenko, Evgeny Morozov
 # Created:      29.06.2011
-# Copyright:    (c) NERSC 2011 - 2013
-# Licence:
-# This file is part of NANSAT.
-# NANSAT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, version 3 of the License.
-# http://www.gnu.org/licenses/gpl-3.0.html
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# Copyright:(c) NERSC
+# Licence:  This file is part of NANSAT. You can redistribute it or modify
+#           under the terms of GNU General Public License, v.3
+#           http://www.gnu.org/licenses/gpl-3.0.html
 from __future__ import absolute_import
 import re
 

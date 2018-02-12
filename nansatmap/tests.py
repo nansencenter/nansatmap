@@ -1,17 +1,12 @@
-#------------------------------------------------------------------------------
-# Name:         test_nansat.py
-# Purpose:      Test the Nansat class
-#
-# Author:       Morten Wergeland Hansen, Anton Korosov, Asuka Yamakawa
-# Modified: Morten Wergeland Hansen
-#
-# Created:      18.06.2014
-# Last modified:18.11.2014 11:48
-# Copyright:    (c) NERSC
-# Licence:      This file is part of NANSAT. You can redistribute it or modify
-#               under the terms of GNU General Public License, v.3
-#               http://www.gnu.org/licenses/gpl-3.0.html
-#------------------------------------------------------------------------------
+# Name:     tests.py
+# Purpose:  Container of NansatmapTest class
+# Authors:  Morten Wergeland Hansen, Anton Korosov, Asuka Yamakawa
+# Created:  18.06.2014
+# Copyright:(c) NERSC
+# Licence:  This file is part of NANSAT. You can redistribute it or modify
+#           under the terms of GNU General Public License, v.3
+#           http://www.gnu.org/licenses/gpl-3.0.html
+
 import unittest
 import warnings
 import os

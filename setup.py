@@ -1,18 +1,18 @@
-#-------------------------------------------------------------------------------
-# Name:     Nansatmap
-# Purpose:  Basemap extension for easy mapping with Nansat
-#
-# Author:
-#
-# Created:  04.09.2017
+# Name:     setup.py
+# Purpose:  Installation instructions
+# Authors:  Anton Korosov, Asuka Yamakawa, Knut-Frode Dagestad,
+#           Morten W. Hansen, Alexander Myasoyedov,
+#           Dmitry Petrenko, Evgeny Morozov
+# Created:  29.06.2011
 # Copyright:(c) NERSC
-# License:  GPLv3
-#-------------------------------------------------------------------------------
+# Licence:  This file is part of NANSAT. You can redistribute it or modify
+#           under the terms of GNU General Public License, v.3
+#           http://www.gnu.org/licenses/gpl-3.0.html
 from setuptools import setup
 from os import path
 
 NAME = 'nansatmap'
-REQS = ['nansat', 'scipy', 'matplotlib', 'basemap']
+REQS = ['nansat', 'scipy', 'basemap']
 
 setup(
     name=NAME,
