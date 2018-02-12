@@ -2,7 +2,7 @@
 # Name:     Nansatmap
 # Purpose:  Basemap extension for easy mapping with Nansat
 #
-# Author:   
+# Author:
 #
 # Created:  04.09.2017
 # Copyright:(c) NERSC
@@ -11,30 +11,20 @@
 from setuptools import setup
 from os import path
 
-readme_file = 'README.md'
 NAME = 'nansatmap'
-REQS = ['scipy', 'matplotlib', 'basemap']
-
-here = path.abspath(path.dirname(path.realpath(__file__)))
-
-# Get the long description from the README file
-long_description = ''
-if path.exists(path.join(here, readme_file)):
-    long_description = open(path.join(here, readme_file)).read()
-
+REQS = ['nansat', 'scipy', 'matplotlib', 'basemap']
 
 setup(
     name=NAME,
-    version='0.1.0',
+    version='0.1.1',
     description='Basemap extension for easy mapping with Nansat',
     long_description=long_description,
     zip_safe=True,
     author=('Anton Korosov', 'Morten Wergeland Hansen', 'Asuka Yamakava', 'Aleksander Vines',),
     author_email='anton.korosov@nersc.no',
     url='https://github.com/nansencenter/nansatmap',
-    download_url='https://github.com/nansencenter/nansatmap/archive/v0.1.0.tar.gz',
+    download_url='https://github.com/nansencenter/nansatmap/archive/v0.1.1.tar.gz',
     packages=['nansatmap'],
-    setup_requires=REQS,
     install_requires=REQS,
     test_suite='nansatmap.tests',
     license='GPLv3',
@@ -50,7 +40,9 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Topic :: Scientific/Engineering',
-        'Topic :: Scientific/Engineering :: Atmospheric Science',
+        'Topic :: Scientific/Engineering :: GIS',
+        'Topic :: Scientific/Engineering :: Human Machine Interfaces',
+        'Topic :: Scientific/Engineering :: Visualization',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Utilities',
     ],
