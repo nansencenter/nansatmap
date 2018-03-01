@@ -17,7 +17,7 @@ install:
   - export GEOS_DIR=$HOME/miniconda/
   - python -c 'import gdal; print gdal.__file__'
   - python -c 'from mpl_toolkits.basemap import Basemap'
-  - pip install https://github.com/nansencenter/nansat/archive/issue196_strip_down.zip
+  - pip install https://github.com/nansencenter/nansat/archive/v1.0.3.zip
   - python setup.py install
 
 script:
