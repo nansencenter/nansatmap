@@ -18,7 +18,7 @@ setup(
     name=NAME,
     version='0.1.1',
     description='Basemap extension for easy mapping with Nansat',
-    long_description=long_description,
+    #long_description=long_description,
     zip_safe=True,
     author=('Anton Korosov', 'Morten Wergeland Hansen', 'Asuka Yamakava', 'Aleksander Vines',),
     author_email='anton.korosov@nersc.no',
