@@ -8,7 +8,7 @@
 # Licence:  This file is part of NANSAT. You can redistribute it or modify
 #           under the terms of GNU General Public License, v.3
 #           http://www.gnu.org/licenses/gpl-3.0.html
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 import re
 
 from mpl_toolkits.basemap import Basemap
@@ -23,7 +23,7 @@ from nansat.tools import get_random_color
 
 
 class Nansatmap(Basemap):
-    '''Perform opeartions with graphical files: create,
+    """Perform opeartions with graphical files: create,
     add legend and geolocation_grids, save.
 
     NansatMap instance is created in the Nansat.write_map method.
@@ -31,7 +31,7 @@ class Nansatmap(Basemap):
     generate a basemap from array(s), add legend and geolocation grids,
     save to a file.
 
-    '''
+    """
     # general attributes
     cmap = cm.jet
     colorbar = None
@@ -60,7 +60,7 @@ class Nansatmap(Basemap):
     DEFAULT_EXTENSION = '.png'
 
     def __init__(self, domain, **kwargs):
-        ''' Set attributes
+        """ Set attributes
         Get proj4 from the given domain and convert the proj4 projection to
         the basemap projection.
 
@@ -86,7 +86,7 @@ class Nansatmap(Basemap):
         ----------
         http://matplotlib.org/basemap/api/basemap_api.html
 
-        '''
+        """
         self.domain = domain
 
         # get proj4
@@ -109,7 +109,8 @@ class Nansatmap(Basemap):
                       'laea': 'laea', 'xxx3': 'splaea', 'xxx4': 'nplaea',
                       'lcc': 'lcc', 'lcca': 'lcc',
                       'mbtfpq': 'mbtfpq',
-                      'somerc': 'merc', 'merc': 'merc', 'omerc': 'merc',
+                      'somerc': 'merc',
+                      'merc': 'merc',
                       'mill': 'mill',
                       'moll': 'moll',
                       'nsper': 'nsper',
@@ -121,7 +122,7 @@ class Nansatmap(Basemap):
                       'mbtfps': 'sinu', 'urmfps': 'sinu',
                       'stere': 'stere', 'sterea': 'stere', 'lee_os': 'stere',
                       'mil_os': 'stere', 'rouss': 'stere',
-                      'ups': 'npstere', 'ups': 'spstere',  # CHECK!!
+                      'ups': 'npstere',
                       'tmerc': 'tmerc', 'gstmerc': 'tmerc', 'utm': 'tmerc',
                       'vandg': 'vandg', 'vandg2': 'vandg',
                       'vandg3': 'vandg', 'vandg4': 'vandg',
@@ -175,7 +176,7 @@ class Nansatmap(Basemap):
         self.fig = plt.figure(**figKwargs)
 
     def smooth(self, idata, mode, **kwargs):
-        '''Smooth data for contour() and contourf()
+        """Smooth data for contour() and contourf()
 
         idata is smoothed by convolve, fourier_gaussian, spline or
         gaussian (default). If contour_mode is 'convolve' and weight is None,
@@ -196,7 +197,7 @@ class Nansatmap(Basemap):
         ----------
         http://docs.scipy.org/doc/scipy/reference/ndimage.html
 
-        '''
+        """
         # modify default parameter
         self._set_defaults(kwargs)
 
@@ -205,7 +206,7 @@ class Nansatmap(Basemap):
             if self.convolve_weights is None:
                 weights = np.ones((self.convolve_weightSize,
                                    self.convolve_weightSize))
-                center = (self.convolve_weightSize - 1) / 2
+                center = int((self.convolve_weightSize - 1) / 2)
                 for i in range(- (center), center + 1, 1):
                     for j in range(- (center), center + 1, 1):
                         weights[i][j] /= pow(2.0, max(abs(i), abs(j)))
@@ -226,7 +227,7 @@ class Nansatmap(Basemap):
                                             axis=self.spline_axis)
         else:
             if mode != 'gaussian':
-                print 'apply Gaussian filter in image_process()'
+                print('apply Gaussian filter in image_process()')
             odata = ndimage.gaussian_filter(idata,
                                             sigma=self.gaussian_sigma,
                                             order=self.gaussian_order,
@@ -235,7 +236,7 @@ class Nansatmap(Basemap):
         return odata
 
     def _do_contour(self, bmfunc, data, v, smooth, mode, **kwargs):
-        ''' Prepare data and make contour or contourf plots
+        """ Prepare data and make contour or contourf plots
 
         1. Smooth data
         1. Add colormap
@@ -253,7 +254,7 @@ class Nansatmap(Basemap):
             'gaussian', 'spline', 'fourier', 'convolve'
             mname of smoothing algorithm to apply
 
-        '''
+        """
         self._create_xy_grids()
 
         # if cmap is given, set to self.cmap
@@ -272,7 +273,7 @@ class Nansatmap(Basemap):
 
     def contour(self, data, v=None, smooth=False, mode='gaussian',
                 label=True, **kwargs):
-        '''Draw lined contour plots
+        """Draw lined contour plots
 
         If smooth is True, data is smoothed. Then draw lined contour.
 
@@ -298,7 +299,7 @@ class Nansatmap(Basemap):
         ---------
         self.mpl : list
             append QuadContourSet instance
-        '''
+        """
 
         self._do_contour(Basemap.contour, data, v, smooth, mode, **kwargs)
 
@@ -308,7 +309,7 @@ class Nansatmap(Basemap):
 
     def contourf(self, data, v=None,
                  smooth=False, mode='gaussian', **kwargs):
-        '''Draw filled contour plots
+        """Draw filled contour plots
 
         If smooth is True, data is smoothed. Then draw filled contour.
 
@@ -333,12 +334,12 @@ class Nansatmap(Basemap):
         self.mpl : list
             append QuadContourSet instance
 
-        '''
+        """
         self._do_contour(Basemap.contourf, data, v, smooth, mode, **kwargs)
         self.colorbar = len(self.mpl) - 1
 
     def imshow(self, data, low=0, high=255, **kwargs):
-        ''' Make RGB plot over the map
+        """ Make RGB plot over the map
 
         data : numpy array
             RGB or RGBA input data
@@ -350,7 +351,7 @@ class Nansatmap(Basemap):
         self.mpl : list
             append AxesImage object with imshow
 
-        '''
+        """
         # Create X/Y axes
         self._create_xy_grids()
 
@@ -370,7 +371,7 @@ class Nansatmap(Basemap):
         self.colorbar = len(self.mpl) - 1
 
     def pcolormesh(self, data, **kwargs):
-        '''Make a pseudo-color plot over the map
+        """Make a pseudo-color plot over the map
 
         Parameters
         ----------
@@ -384,7 +385,7 @@ class Nansatmap(Basemap):
         self.mpl : list
             append matplotlib.collections.QuadMesh object
 
-        '''
+        """
         # mask nan data
         data = np.ma.array(data, mask=np.isnan(data))
         # Plot a quadrilateral mesh.
@@ -394,7 +395,7 @@ class Nansatmap(Basemap):
         self.colorbar = len(self.mpl) - 1
 
     def quiver(self, dataX, dataY, step=None, quivectors=None, **kwargs):
-        '''Draw quiver plots
+        """Draw quiver plots
 
         Parameters
         ----------
@@ -413,7 +414,7 @@ class Nansatmap(Basemap):
         self.mpl : list
             append matplotlib.quiver.Quiver instance
 
-        '''
+        """
         # if Nan is included, apply mask
         dataX = np.ma.array(dataX, mask=np.isnan(dataX))
         dataY = np.ma.array(dataY, mask=np.isnan(dataY))
@@ -462,7 +463,7 @@ class Nansatmap(Basemap):
             self.mpl.append(Q)
 
     def add_colorbar(self, fontsize=6, **kwargs):
-        '''Add color bar
+        """Add color bar
 
         Parameters
         ----------
@@ -473,7 +474,7 @@ class Nansatmap(Basemap):
         ---------
         Adds colorbar to self.fig
 
-        '''
+        """
         if kwargs is None:
             kwargs = {}
         if not ('orientation' in kwargs.keys()):
@@ -507,11 +508,8 @@ class Nansatmap(Basemap):
             plt.xticks(fontsize=fontsize)
             plt.axes(imaxes)
 
-    def drawgrid(self, lat_num=5, lon_num=5,
-                 lat_labels=[True, False, False, False],
-                 lon_labels=[False, False, True, False],
-                 **kwargs):
-        '''Draw and label parallels (lat and lon lines) for values (in degrees)
+    def drawgrid(self, lat_num=5, lon_num=5, lat_labels=None, lon_labels=None, **kwargs):
+        """Draw and label parallels (lat and lon lines) for values (in degrees)
 
         Parameters
         -----------
@@ -527,7 +525,11 @@ class Nansatmap(Basemap):
 
         See also: Basemap.drawparallels(), Basemap.drawmeridians()
 
-        '''
+        """
+        if lat_labels is None:
+            lat_labels = [True, False, False, False]
+        if lon_labels is None:
+            lon_labels = [False, False, True, False]
         self.drawparallels(np.arange(self.latMin, self.latMax,
                            (self.latMax - self.latMin) / lat_num),
                            labels=lat_labels, **kwargs)
@@ -536,13 +538,13 @@ class Nansatmap(Basemap):
                            labels=lon_labels, **kwargs)
 
     def draw_continents(self, **kwargs):
-        ''' Draw continents
+        """ Draw continents
 
         Parameters
         ----------
         Parameters for basemap.fillcontinents
 
-        '''
+        """
 
         if kwargs is None:
             kwargs = {}
@@ -556,7 +558,7 @@ class Nansatmap(Basemap):
 
     def save(self, fileName, landmask=True, dpi=75,
              pad_inches=0, bbox_inches='tight', **kwargs):
-        '''Draw continents and save
+        """Draw continents and save
 
         Parameters
         -----------
@@ -566,7 +568,7 @@ class Nansatmap(Basemap):
             Draw landmask?
         Parameters for basemap.fillcontinents
 
-        '''
+        """
         if landmask:
             self.draw_continents(**kwargs)
 
@@ -578,7 +580,7 @@ class Nansatmap(Basemap):
                          bbox_inches=bbox_inches)
 
     def _set_defaults(self, idict):
-        '''Check input params and set defaut values
+        """Check input params and set defaut values
 
         Look throught default parameters (self.d) and given parameters (dict)
         and paste value from input if the key matches
@@ -592,36 +594,36 @@ class Nansatmap(Basemap):
         ---------
             default self attributes
 
-        '''
+        """
         for key in idict:
             if hasattr(self, key):
                 setattr(self, key, idict[key])
 
     def _create_lonlat_grids(self):
-        '''Generate grids with lon/lat coordinates in each cell
+        """Generate grids with lon/lat coordinates in each cell
 
         Modifies
         ---------
         self.lon : numpy array with lon coordinates
         self.lat : numpy array with lat coordinates
-        '''
+        """
         if self.lon is None or self.lat is None:
             self.lon, self.lat = self.domain.get_geolocation_grids()
 
     def _create_xy_grids(self):
-        '''Generate grids with x/y coordinates in each cell
+        """Generate grids with x/y coordinates in each cell
 
         Modifies
         ---------
         self.x : numpy array with X coordinates
         self.y : numpy array with Y coordinates
-        '''
+        """
         self._create_lonlat_grids()
         if self.x is None or self.y is None:
             self.x, self.y = self(self.lon, self.lat)
 
     def _create_random_colormap(self, values, low=0, high=255):
-        ''' Generate colormap and colorbar with random discrete colors
+        """ Generate colormap and colorbar with random discrete colors
 
         Parameters
         ----------
@@ -631,7 +633,7 @@ class Nansatmap(Basemap):
         -------
             cmap : matplotlib.color.Colormap
             norm : matplotlib.color.BoundaryNorm
-        '''
+        """
         # create first random color
         randomColors = [get_random_color(low=low, high=high)]
         # add more random colors
@@ -648,13 +650,13 @@ class Nansatmap(Basemap):
         return cmap, norm
 
     def add_zone_labels(self, zones, fontsize=5):
-        ''' Finds best place of labels for a zone map, adds labels to the map
+        """ Finds best place of labels for a zone map, adds labels to the map
 
         Parameters
         ----------
             zones : numpy array with integer zones
                 the same array as usied in Nansatmap.imshow
-        '''
+        """
         zoneIndices = np.unique(zones[np.isfinite(zones)])
         for zi in zoneIndices:
             zrows, zcols = np.nonzero(zones == zi)
