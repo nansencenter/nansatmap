@@ -1,6 +1,7 @@
 language: python
 python:
   - 2.7
+  - 3.5
 sudo: false
 
 before_install:
@@ -10,14 +11,8 @@ before_install:
   - export PATH=$HOME/miniconda/bin:$PATH
 
 install:
-  - conda update -q --yes conda
-  - conda install -q --yes -c conda-forge gdal numpy scipy matplotlib pillow netcdf4 nose cfunits coveralls
-  - conda install -q --yes -c conda-forge basemap
-  - export GDAL_DATA=$HOME/miniconda/share/gdal/
-  - export GEOS_DIR=$HOME/miniconda/
-  - python -c 'import gdal; print gdal.__file__'
-  - python -c 'from mpl_toolkits.basemap import Basemap'
-  - pip install https://github.com/nansencenter/nansat/archive/issue196_strip_down.zip
+  - conda create -q -c conda-forge -n test-environment python=$TRAVIS_PYTHON_VERSION nansat scipy basemap nose coveralls
+  - source activate test-environment
   - python setup.py install
 
 script:
